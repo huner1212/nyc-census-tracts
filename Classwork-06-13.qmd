@@ -1,0 +1,30 @@
+---
+title: "Classwork-6-13"
+author: "Hunter Stephens"
+format: html
+---
+
+```{r}
+#| label: setup
+#| echo: FALSE
+#| message: false
+library(tidyverse)
+library(ggbeeswarm)
+```
+
+```{r}
+#| warning: false
+#| echo: false
+nyc_tracts <- read_csv("data/nyc_tracts.csv")
+nyc_tracts |> ggplot(mapping = aes(x = med_income, y = race, color = med_income)) +
+  geom_quasirandom(alpha = 0.5) +
+  scale_color_viridis_c() + 
+  scale_x_continuous(labels = scales::dollar_format()) +
+  theme(legend.position = "none") +
+  labs(title = "Household income distribution by largest racial/ethic group",
+       subtitle = "Census tracts, New York City",
+       x = "Median household income",
+       y = "Largest group in Census tract", 
+       caption = "Data source: 2016-2020 ACS",
+       color = "Median Income")
+```
